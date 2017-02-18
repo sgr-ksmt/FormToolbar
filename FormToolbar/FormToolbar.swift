@@ -103,7 +103,7 @@ final public class FormToolbar: UIToolbar {
         set(inputs: inputs)
         
         if attachToolbarToInputs {
-            formItems.forEach { $0.input?.inputAccessoryView = self }
+            inputs.forEach { $0.inputAccessoryView = self }
         }
         
         updateBarItems()
