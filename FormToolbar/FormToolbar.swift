@@ -15,11 +15,9 @@ final public class FormToolbar: UIToolbar {
         case leftRight
     }
     
-    class FormItem {
+    private class FormItem {
         weak var input: FormInput?
-
         weak var previousInput: FormInput?
-
         weak var nextInput: FormInput?
     }
     
@@ -87,20 +85,40 @@ final public class FormToolbar: UIToolbar {
             }
             backButton = nil
             forwardButton = nil
-            updateItems()
+            updateBarItems()
         }
     }
     
     public var doneButtonTitle: String = "Done" {
         didSet {
             doneButton = nil
-            updateItems()
+            updateBarItems()
         }
     }
     
     
     required convenience public init(inputs: [FormInput], attachToolbarToInputs: Bool = true) {
         self.init(frame: CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width, height: 44.0)))
+        
+        set(inputs: inputs)
+        
+        if attachToolbarToInputs {
+            formItems.forEach { $0.input?.inputAccessoryView = self }
+        }
+        
+        updateBarItems()
+        updateToolbar(currentInput: nil)
+    }
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required public init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    public func set(inputs: [FormInput]) {
         self.formItems = inputs.map { input in
             let formItem = FormItem()
             formItem.input = input
@@ -115,30 +133,18 @@ final public class FormToolbar: UIToolbar {
                 lastFormItem = formItem
             }
         }
-        
-        if attachToolbarToInputs {
-            formItems.forEach { $0.input?.inputAccessoryView = self }
-        }
-        
-        updateItems()
-        update(currentInput: nil)
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-    }
-    
-    required public init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-    public func update(currentInput: UITextInput?) {
+    public func updateToolbar(currentInput: UITextInput?) {
         guard let currentInput = currentInput else {
             backButton.isEnabled = false
             forwardButton.isEnabled = false
             return
         }
-        
+
+        backButton.isEnabled = false
+        forwardButton.isEnabled = false
+
         for (index, formItem) in formItems.enumerated() {
             guard let input = formItem.input else {
                 continue
@@ -168,7 +174,7 @@ final public class FormToolbar: UIToolbar {
         }
     }
     
-    private func updateItems() {
+    private func updateBarItems() {
         let buttonItems: [UIBarButtonItem] = [backButton, fixedSpacer, forwardButton, flexibleSpacer, doneButton]
         setItems(buttonItems, animated: false)
     }

@@ -62,12 +62,20 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate 
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        toolbar.update(currentInput: textField)
+        toolbar.updateToolbar(currentInput: textField)
         activeInput = textField
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == doneButtonTitleForm {
+            return false
+        }
+        toolbar.goForward()
+        return true
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
-        toolbar.update(currentInput: textView)
+        toolbar.updateToolbar(currentInput: textView)
         activeInput = textView
     }
     
