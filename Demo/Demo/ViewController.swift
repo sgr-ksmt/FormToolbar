@@ -45,7 +45,6 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate 
         form3.delegate = self
         form4.delegate = self
         form5.delegate = self
-        toolbar.direction = .upDown
         
         doneButtonTitleForm.addTarget(self, action: #selector(doneButtonTitleFormDidChange(_:)), for: .editingChanged)
         control.addTarget(self, action: #selector(controlDidChange(_:)), for: .valueChanged)

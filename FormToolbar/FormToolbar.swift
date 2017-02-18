@@ -26,9 +26,9 @@ final public class FormToolbar: UIToolbar {
         return button
     }()
     
-    private lazy var fixedSpacer: UIBarButtonItem = {
+    private lazy var fixedSpacer: UIBarButtonItem! = {
         let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
-        spacer.width = 16.0
+        spacer.width = self.direction == .upDown ? 8.0 : 20.0
         return spacer
     }()
     
@@ -73,7 +73,7 @@ final public class FormToolbar: UIToolbar {
         doneButtonTintColor = color
     }
 
-    public var direction: Direction = .upDown {
+    public var direction: Direction = .leftRight {
         didSet {
             switch direction {
             case .upDown:
@@ -85,6 +85,7 @@ final public class FormToolbar: UIToolbar {
             }
             backButton = nil
             forwardButton = nil
+            fixedSpacer = nil
             updateBarItems()
         }
     }
