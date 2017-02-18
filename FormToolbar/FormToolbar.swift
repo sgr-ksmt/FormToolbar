@@ -162,7 +162,11 @@ final public class FormToolbar: UIToolbar {
     ///   - attachToolbarToInputs: If it is true, automatically add self to `input.inputAccessoryView`.
     ///     default is `true`
     public func set(inputs: [FormInput], attachToolbarToInputs: Bool = true) {
-        self.formItems = inputs.map { input in
+        
+        // remove toolbar before releasing
+        formItems.forEach { $0.input?.inputAccessoryView = nil }
+        
+        formItems = inputs.map { input in
             let formItem = FormItem()
             formItem.input = input
             return formItem
