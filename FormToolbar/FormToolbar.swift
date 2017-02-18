@@ -10,6 +10,12 @@ import UIKit
 
 final public class FormToolbar: UIToolbar {
     
+    /// Direction
+    /// 
+    /// Back/Forward arrow button type.
+    ///
+    /// - upDown: Back/Forward are "^" "v"
+    /// - leftRight: Back/Forward are "<" ">"
     public enum Direction {
         case upDown
         case leftRight
@@ -49,30 +55,38 @@ final public class FormToolbar: UIToolbar {
     private var backButtonType: UIBarButtonHiddenItem = .prev
     private var forwardButtonType: UIBarButtonHiddenItem = .next
     
+    /// Back button's tint color.
     public var backButtonTintColor: UIColor? {
         didSet {
             backButton.tintColor = backButtonTintColor
         }
     }
     
+    /// Forward button's tint color.
     public var forwardButtonTintColor: UIColor? {
         didSet {
             forwardButton.tintColor = forwardButtonTintColor
         }
     }
 
+    /// Done button's tint color.
     public var doneButtonTintColor: UIColor? {
         didSet {
             doneButton.tintColor = doneButtonTintColor
         }
     }
     
+    /// Set buttons' tint color
+    ///
+    /// - Parameter color: UIColor
     public func setButtonsTintColor(_ color: UIColor) {
         backButtonTintColor = color
         forwardButtonTintColor = color
         doneButtonTintColor = color
     }
 
+    
+    /// Back/Forward button arrow direction
     public var direction: Direction = .leftRight {
         didSet {
             switch direction {
@@ -90,6 +104,8 @@ final public class FormToolbar: UIToolbar {
         }
     }
     
+    /// Done button's title
+    /// Default is `"Done"`.
     public var doneButtonTitle: String = "Done" {
         didSet {
             doneButton = nil
@@ -101,29 +117,34 @@ final public class FormToolbar: UIToolbar {
         return formItems.filter { $0.input?.responder.isFirstResponder ?? false }.first
     }
     
+    /// Get current input.
     public var currentInput: FormInput? {
         return currentFormItem?.input
     }
 
+    /// Get previous input.
     public var previousInput: FormInput? {
         return currentFormItem?.previousInput
     }
 
+    /// Get next input.
     public var nextInput: FormInput? {
         return currentFormItem?.nextInput
     }
     
+    /// Initializer
+    ///
+    /// - Parameters:
+    ///   - inputs: An array of FormInput.
+    ///   - attachToolbarToInputs: If it is true, automatically add self to `input.inputAccessoryView`. 
+    ///     default is `true`
     required convenience public init(inputs: [FormInput], attachToolbarToInputs: Bool = true) {
         self.init(frame: CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width, height: 44.0)))
         
-        set(inputs: inputs)
-        
-        if attachToolbarToInputs {
-            inputs.forEach { $0.inputAccessoryView = self }
-        }
+        set(inputs: inputs, attachToolbarToInputs: attachToolbarToInputs)
         
         updateBarItems()
-        updateToolbar(currentInput: nil)
+        updateToolbar()
     }
     
     override init(frame: CGRect) {
@@ -134,7 +155,13 @@ final public class FormToolbar: UIToolbar {
         fatalError("init(coder:) has not been implemented")
     }
     
-    public func set(inputs: [FormInput]) {
+    /// Set new form inputs to toolbar
+    ///
+    /// - Parameters:
+    ///   - inputs: An array of FormInput.
+    ///   - attachToolbarToInputs: If it is true, automatically add self to `input.inputAccessoryView`.
+    ///     default is `true`
+    public func set(inputs: [FormInput], attachToolbarToInputs: Bool = true) {
         self.formItems = inputs.map { input in
             let formItem = FormItem()
             formItem.input = input
@@ -149,9 +176,14 @@ final public class FormToolbar: UIToolbar {
                 lastFormItem = formItem
             }
         }
+        
+        if attachToolbarToInputs {
+            inputs.forEach { $0.inputAccessoryView = self }
+        }
     }
     
-    public func updateToolbar(currentInput: UITextInput?) {
+    /// Update toolbar's buttons.
+    public func updateToolbar() {
         guard let currentInput = currentInput else {
             backButton.isEnabled = false
             forwardButton.isEnabled = false
@@ -176,6 +208,7 @@ final public class FormToolbar: UIToolbar {
         }
     }
     
+    /// Go back to previous input.
     public func goBack() {
         if let currentFormItem = currentFormItem {
             currentFormItem.input?.responder.resignFirstResponder()
@@ -183,6 +216,7 @@ final public class FormToolbar: UIToolbar {
         }
     }
     
+    /// Go forward to next input.
     public func goForward() {
         if let currentFormItem = currentFormItem {
             currentFormItem.input?.responder.resignFirstResponder()

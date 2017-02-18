@@ -8,6 +8,8 @@
 
 import Foundation
 
+/// FormInput protocol
+/// Handle UITextField and UITextView in the same way.
 public protocol FormInput: UITextInput {
     var inputAccessoryView: UIView? { get set }
     var responder: UIResponder { get }
