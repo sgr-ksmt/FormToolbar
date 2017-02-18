@@ -85,7 +85,7 @@ final public class FormToolbar: UIToolbar {
         
         do {
             var lastFormItem: FormItem?
-            self.formItems.forEach { formItem in
+            formItems.forEach { formItem in
                 lastFormItem?.nextInput = formItem.input
                 formItem.previousInput = lastFormItem?.input
                 lastFormItem = formItem
@@ -106,55 +106,63 @@ final public class FormToolbar: UIToolbar {
     
     public func update(currentInput: UITextInput?) {
         guard let currentInput = currentInput else {
-            self.backButton.isEnabled = false
-            self.forwardButton.isEnabled = false
+            backButton.isEnabled = false
+            forwardButton.isEnabled = false
             return
         }
         
-        for (index, formItem) in self.formItems.enumerated() {
+        for (index, formItem) in formItems.enumerated() {
             guard let input = formItem.input else {
                 continue
             }
             
             if input.isEqual(currentInput) {
                 let isFirstForm = index == 0
-                let isLastForm = index == (self.formItems.count - 1)
-                self.backButton.isEnabled = !isFirstForm || formItem.previousInput != nil
-                self.forwardButton.isEnabled = !isLastForm || formItem.nextInput != nil
+                let isLastForm = index == (formItems.count - 1)
+                backButton.isEnabled = !isFirstForm || formItem.previousInput != nil
+                forwardButton.isEnabled = !isLastForm || formItem.nextInput != nil
                 break
             }
         }
     }
     
+    public func goBack() {
+        if let currentFormItem = detectCurrentFormItem() {
+            currentFormItem.input.flatMap(castToResponder)?.resignFirstResponder()
+            currentFormItem.previousInput.flatMap(castToResponder)?.becomeFirstResponder()
+        }
+    }
+    
+    public func goForward() {
+        if let currentFormItem = detectCurrentFormItem() {
+            currentFormItem.input.flatMap(castToResponder)?.resignFirstResponder()
+            currentFormItem.nextInput.flatMap(castToResponder)?.becomeFirstResponder()
+        }
+    }
+    
     private func updateItems() {
-        let buttonItems: [UIBarButtonItem] = [
-            self.backButton, self.fixedSpacer, self.forwardButton, self.flexibleSpacer, self.doneButton
-        ]
-        self.setItems(buttonItems, animated: false)
+        let buttonItems: [UIBarButtonItem] = [backButton, fixedSpacer, forwardButton, flexibleSpacer, doneButton]
+        setItems(buttonItems, animated: false)
     }
     
     private func detectCurrentFormItem() -> FormItem? {
-        return self.formItems.filter { ($0.input as? UIResponder)?.isFirstResponder ?? false }.first
+        return formItems.filter { $0.input.flatMap(castToResponder)?.isFirstResponder ?? false }.first
     }
     
     @objc private func backButtonDidTap(_: UIBarButtonItem) {
-        if let currentFormItem = self.detectCurrentFormItem() {
-            (currentFormItem.input as? UIResponder)?.resignFirstResponder()
-            (currentFormItem.previousInput as? UIResponder)?.becomeFirstResponder()
-        }
+        goBack()
     }
     
     @objc private func forwardButtonDidTap(_: UIBarButtonItem) {
-        if let currentFormItem = self.detectCurrentFormItem() {
-            (currentFormItem.input as? UIResponder)?.resignFirstResponder()
-            (currentFormItem.nextInput as? UIResponder)?.becomeFirstResponder()
-        }
+        goForward()
     }
     
     @objc private func doneButtonDidtap(_: UIBarButtonItem) {
-        if let currentFormItem = self.detectCurrentFormItem() {
-            (currentFormItem.input as? UIResponder)?.resignFirstResponder()
-        }
+        detectCurrentFormItem()?.input.flatMap(castToResponder)?.resignFirstResponder()
     }
-    
 }
+
+private func castToResponder(_ value: Any) -> UIResponder? {
+    return value as? UIResponder
+}
+
