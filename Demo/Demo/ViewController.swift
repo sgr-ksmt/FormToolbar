@@ -48,6 +48,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate 
         toolbar.direction = .upDown
         
         doneButtonTitleForm.addTarget(self, action: #selector(doneButtonTitleFormDidChange(_:)), for: .editingChanged)
+        control.addTarget(self, action: #selector(controlDidChange(_:)), for: .valueChanged)
     }
     
     override func viewDidLoad() {
@@ -74,6 +75,10 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate 
         if let text = textField.text, !text.isEmpty {
             toolbar.doneButtonTitle = text
         }
+    }
+    
+    @objc func controlDidChange(_ control: UISegmentedControl) {
+        toolbar.direction = control.selectedSegmentIndex == 0 ? .leftRight : .upDown
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
