@@ -156,6 +156,7 @@
                         <outlet property="form3" destination="bha-Zx-eio" id="xdA-8x-wmK"/>
                         <outlet property="form4" destination="mgM-3u-mzm" id="AWY-2R-5aq"/>
                         <outlet property="form5" destination="Hqp-gz-vES" id="eV8-kR-62t"/>
+                        <outlet property="scrollView" destination="DnD-Dg-DGf" id="cba-NN-VUT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

@@ -11,6 +11,8 @@ import FormToolbar
 
 class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
     
+    @IBOutlet private weak var scrollView: UIScrollView!
+    
     @IBOutlet private weak var form1: UITextField!
     @IBOutlet private weak var form2: UITextField!
     @IBOutlet private weak var form3: UITextView! {
@@ -26,21 +28,31 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate 
     @IBOutlet private weak var control: UISegmentedControl!
     @IBOutlet private weak var doneButtonTitleForm: UITextField!
 
-    lazy var toolbar: FormToolbar = {
+    private lazy var toolbar: FormToolbar = {
         return FormToolbar(inputs: self.inputs)
     }()
     
-    var inputs: [FormInput] {
+    private var inputs: [FormInput] {
         return [form1, form2, form3, form4, form5]
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    private weak var activeInput: FormInput?
+    
+    override func loadView() {
+        super.loadView()
         form1.delegate = self
         form2.delegate = self
         form3.delegate = self
         form4.delegate = self
         form5.delegate = self
+        toolbar.doneButtonTitle = "!!!"
+        toolbar.backgroundColor = .brown
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -49,10 +61,29 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate 
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
         toolbar.update(currentInput: textField)
+        activeInput = textField
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         toolbar.update(currentInput: textView)
+        activeInput = textView
+    }
+    
+    @objc func keyboardWillShow(_ notification: Notification) {
+        let userInfo: NSDictionary = notification.userInfo! as NSDictionary
+        let keyboardInfo = userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue
+        let keyboardSize = keyboardInfo.cgRectValue.size
+        let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + 16.0, right: 0)
+        scrollView.contentInset = contentInsets
+        scrollView.scrollIndicatorInsets = contentInsets
+    }
+
+    @objc func keyboardWillHide(_ notification: Notification) {
+        scrollView.contentInset = .zero
+        scrollView.scrollIndicatorInsets = .zero
+    }
+
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
-
