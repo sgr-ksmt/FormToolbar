@@ -8,6 +8,13 @@
 
 import UIKit
 
+public protocol FormInput: UITextInput {
+    var inputAccessoryView: UIView? { get set }
+}
+
+extension UITextField: FormInput {}
+extension UITextView: FormInput {}
+
 final public class FormToolbar: UIToolbar {
     
     public enum Direction {
@@ -16,11 +23,11 @@ final public class FormToolbar: UIToolbar {
     }
     
     class FormItem {
-        weak var input: UITextInput?
+        weak var input: FormInput?
 
-        weak var previousInput: UITextInput?
+        weak var previousInput: FormInput?
 
-        weak var nextInput: UITextInput?
+        weak var nextInput: FormInput?
     }
     
     private lazy var backButton: UIBarButtonItem! = {
@@ -75,7 +82,7 @@ final public class FormToolbar: UIToolbar {
     }
     
     
-    required convenience public init(inputs: [UITextInput]) {
+    required convenience public init(inputs: [FormInput], attachToolbarToInputs: Bool = true) {
         self.init(frame: CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width, height: 44.0)))
         self.formItems = inputs.map { input in
             let formItem = FormItem()
@@ -90,6 +97,10 @@ final public class FormToolbar: UIToolbar {
                 formItem.previousInput = lastFormItem?.input
                 lastFormItem = formItem
             }
+        }
+        
+        if attachToolbarToInputs {
+            formItems.forEach { $0.input?.inputAccessoryView = self }
         }
         
         updateItems()

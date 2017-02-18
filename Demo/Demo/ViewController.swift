@@ -7,19 +7,41 @@
 //
 
 import UIKit
+import FormToolbar
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate {
+    
+    @IBOutlet private weak var form1: UITextField!
+    @IBOutlet private weak var form2: UITextField!
+    @IBOutlet private weak var form3: UITextView!
+    @IBOutlet private weak var form4: UITextField!
+    @IBOutlet private weak var form5: UITextField!
+    
+    @IBOutlet private weak var control: UISegmentedControl!
+    @IBOutlet private weak var doneButtonTitleForm: UITextField!
 
+    lazy var toolbar: FormToolbar = {
+        FormToolbar(inputs: self.inputs)
+    }()
+    
+    var inputs: [FormInput] {
+        return [form1, form2, form3, form4, form5]
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
-
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        toolbar.update(currentInput: textField)
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        toolbar.update(currentInput: textView)
+    }
 }
 

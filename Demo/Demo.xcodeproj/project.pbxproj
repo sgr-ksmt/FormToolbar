@@ -12,7 +12,23 @@
 		4DB4C8A31E57F87C00934E22 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DB4C8A11E57F87C00934E22 /* Main.storyboard */; };
 		4DB4C8A51E57F87C00934E22 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4DB4C8A41E57F87C00934E22 /* Assets.xcassets */; };
 		4DB4C8A81E57F87C00934E22 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4DB4C8A61E57F87C00934E22 /* LaunchScreen.storyboard */; };
+		4DB4C8B81E5804D800934E22 /* FormToolbar.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB4C8B71E5804D800934E22 /* FormToolbar.framework */; };
+		4DB4C8B91E5804D800934E22 /* FormToolbar.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4DB4C8B71E5804D800934E22 /* FormToolbar.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4DB4C8B61E5804C100934E22 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4DB4C8B91E5804D800934E22 /* FormToolbar.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		4DB4C89A1E57F87C00934E22 /* Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -22,6 +38,7 @@
 		4DB4C8A41E57F87C00934E22 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		4DB4C8A71E57F87C00934E22 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4DB4C8A91E57F87C00934E22 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4DB4C8B71E5804D800934E22 /* FormToolbar.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = FormToolbar.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DB4C8B81E5804D800934E22 /* FormToolbar.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -38,6 +56,7 @@
 		4DB4C8911E57F87C00934E22 = {
 			isa = PBXGroup;
 			children = (
+				4DB4C8B71E5804D800934E22 /* FormToolbar.framework */,
 				4DB4C89C1E57F87C00934E22 /* Demo */,
 				4DB4C89B1E57F87C00934E22 /* Products */,
 			);
@@ -74,6 +93,7 @@
 				4DB4C8961E57F87C00934E22 /* Sources */,
 				4DB4C8971E57F87C00934E22 /* Frameworks */,
 				4DB4C8981E57F87C00934E22 /* Resources */,
+				4DB4C8B61E5804C100934E22 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -96,6 +116,7 @@
 				TargetAttributes = {
 					4DB4C8991E57F87C00934E22 = {
 						CreatedOnToolsVersion = 8.2.1;
+						DevelopmentTeam = KW3G83N6K6;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -258,6 +279,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = KW3G83N6K6;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.formtoolbar.Demo";
@@ -270,6 +292,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = KW3G83N6K6;
 				INFOPLIST_FILE = Demo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "-.formtoolbar.Demo";
@@ -297,6 +320,7 @@
 				4DB4C8AE1E57F87C00934E22 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
