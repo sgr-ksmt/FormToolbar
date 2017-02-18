@@ -169,8 +169,8 @@ final public class FormToolbar: UIToolbar {
             if input.isEqual(currentInput) {
                 let isFirstForm = index == 0
                 let isLastForm = index == (formItems.count - 1)
-                backButton.isEnabled = !isFirstForm || formItem.previousInput != nil
-                forwardButton.isEnabled = !isLastForm || formItem.nextInput != nil
+                backButton.isEnabled = !isFirstForm && formItem.previousInput != nil
+                forwardButton.isEnabled = !isLastForm && formItem.nextInput != nil
                 break
             }
         }
