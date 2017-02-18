@@ -144,7 +144,7 @@ final public class FormToolbar: UIToolbar {
         set(inputs: inputs, attachToolbarToInputs: attachToolbarToInputs)
         
         updateBarItems()
-        updateToolbar()
+        update()
     }
     
     override init(frame: CGRect) {
@@ -183,7 +183,7 @@ final public class FormToolbar: UIToolbar {
     }
     
     /// Update toolbar's buttons.
-    public func updateToolbar() {
+    public func update() {
         guard let currentInput = currentInput else {
             backButton.isEnabled = false
             forwardButton.isEnabled = false

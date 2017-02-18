@@ -61,7 +61,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate 
     }
 
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        toolbar.updateToolbar()
+        toolbar.update()
         activeInput = textField
     }
     
@@ -74,7 +74,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate 
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        toolbar.updateToolbar()
+        toolbar.update()
         activeInput = textView
     }
     
