@@ -10,6 +10,8 @@ Simple, movable and powerful toolbar for UITextField and UITextView.
 |:-----------------------:|:---------------------:|
 | ![gif](docs/sample.gif) | ![gif](docs/img1.png) |
 
+- [Appetize.io's Demo is here!](https://appetize.io/embed/w7muzzpbfr2p5fw1juctnp9qn0?device=iphone7&scale=100&orientation=portrait&osVersion=10.2)
+
 ## Feature
 - Easy to use. (Just add inputs to toolbar).
 - available to use `UITextField` and `UITextView`. (mix ok!!)
