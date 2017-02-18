@@ -12,6 +12,7 @@ public protocol FormInput: UITextInput {
     var inputAccessoryView: UIView? { get set }
     var responder: UIResponder { get }
     var view: UIView { get }
+    var inputtedText: String { get set }
 }
 
 extension UITextField: FormInput {
@@ -22,6 +23,15 @@ extension UITextField: FormInput {
     public var view: UIView {
         return self as UIView
     }
+    
+    public var inputtedText: String {
+        get {
+            return text ?? ""
+        }
+        set {
+            text = newValue
+        }
+    }
 }
 
 extension UITextView: FormInput {
@@ -31,5 +41,14 @@ extension UITextView: FormInput {
     
     public var view: UIView {
         return self as UIView
+    }
+    
+    public var inputtedText: String {
+        get {
+            return text
+        }
+        set {
+            text = newValue
+        }
     }
 }

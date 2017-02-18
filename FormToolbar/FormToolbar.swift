@@ -51,6 +51,30 @@ final public class FormToolbar: UIToolbar {
     private var backButtonType: UIBarButtonHiddenItem = .prev
     private var forwardButtonType: UIBarButtonHiddenItem = .next
     
+    public var backButtonTintColor: UIColor? {
+        didSet {
+            backButton.tintColor = backButtonTintColor
+        }
+    }
+    
+    public var forwardButtonTintColor: UIColor? {
+        didSet {
+            forwardButton.tintColor = forwardButtonTintColor
+        }
+    }
+
+    public var doneButtonTintColor: UIColor? {
+        didSet {
+            doneButton.tintColor = doneButtonTintColor
+        }
+    }
+    
+    public func setButtonsTintColor(_ color: UIColor) {
+        backButtonTintColor = color
+        forwardButtonTintColor = color
+        doneButtonTintColor = color
+    }
+
     public var direction: Direction = .upDown {
         didSet {
             switch direction {

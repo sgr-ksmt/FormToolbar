@@ -45,8 +45,9 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate 
         form3.delegate = self
         form4.delegate = self
         form5.delegate = self
-        toolbar.doneButtonTitle = "!!!"
-        toolbar.backgroundColor = .brown
+        toolbar.direction = .upDown
+        
+        doneButtonTitleForm.addTarget(self, action: #selector(doneButtonTitleFormDidChange(_:)), for: .editingChanged)
     }
     
     override func viewDidLoad() {
@@ -67,6 +68,12 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate 
     func textViewDidBeginEditing(_ textView: UITextView) {
         toolbar.update(currentInput: textView)
         activeInput = textView
+    }
+    
+    @objc private func doneButtonTitleFormDidChange(_ textField: UITextField) {
+        if let text = textField.text, !text.isEmpty {
+            toolbar.doneButtonTitle = text
+        }
     }
     
     @objc func keyboardWillShow(_ notification: Notification) {
