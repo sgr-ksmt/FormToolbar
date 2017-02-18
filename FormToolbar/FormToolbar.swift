@@ -8,13 +8,6 @@
 
 import UIKit
 
-public protocol FormInput: UITextInput {
-    var inputAccessoryView: UIView? { get set }
-}
-
-extension UITextField: FormInput {}
-extension UITextView: FormInput {}
-
 final public class FormToolbar: UIToolbar {
     
     public enum Direction {
@@ -139,15 +132,15 @@ final public class FormToolbar: UIToolbar {
     
     public func goBack() {
         if let currentFormItem = detectCurrentFormItem() {
-            currentFormItem.input.flatMap(castToResponder)?.resignFirstResponder()
-            currentFormItem.previousInput.flatMap(castToResponder)?.becomeFirstResponder()
+            currentFormItem.input?.responder.resignFirstResponder()
+            currentFormItem.previousInput?.responder.becomeFirstResponder()
         }
     }
     
     public func goForward() {
         if let currentFormItem = detectCurrentFormItem() {
-            currentFormItem.input.flatMap(castToResponder)?.resignFirstResponder()
-            currentFormItem.nextInput.flatMap(castToResponder)?.becomeFirstResponder()
+            currentFormItem.input?.responder.resignFirstResponder()
+            currentFormItem.nextInput?.responder.becomeFirstResponder()
         }
     }
     
@@ -157,7 +150,7 @@ final public class FormToolbar: UIToolbar {
     }
     
     private func detectCurrentFormItem() -> FormItem? {
-        return formItems.filter { $0.input.flatMap(castToResponder)?.isFirstResponder ?? false }.first
+        return formItems.filter { $0.input?.responder.isFirstResponder ?? false }.first
     }
     
     @objc private func backButtonDidTap(_: UIBarButtonItem) {
@@ -169,11 +162,6 @@ final public class FormToolbar: UIToolbar {
     }
     
     @objc private func doneButtonDidtap(_: UIBarButtonItem) {
-        detectCurrentFormItem()?.input.flatMap(castToResponder)?.resignFirstResponder()
+        detectCurrentFormItem()?.input?.responder.resignFirstResponder()
     }
 }
-
-private func castToResponder(_ value: Any) -> UIResponder? {
-    return value as? UIResponder
-}
-

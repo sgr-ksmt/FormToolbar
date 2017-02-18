@@ -12,6 +12,7 @@
 		4D7C818F1E57F7F200C6DD71 /* FormToolbar.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D7C81811E57F7F100C6DD71 /* FormToolbar.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4DB4C8B01E57F8B900934E22 /* FormToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB4C8AF1E57F8B900934E22 /* FormToolbar.swift */; };
 		4DB4C8B21E57F97900934E22 /* UIBarButtonItem+Hidden.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB4C8B11E57F97900934E22 /* UIBarButtonItem+Hidden.swift */; };
+		4DB4C8BB1E58376400934E22 /* FormInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DB4C8BA1E58376400934E22 /* FormInput.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -33,6 +34,7 @@
 		4D7C818E1E57F7F200C6DD71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4DB4C8AF1E57F8B900934E22 /* FormToolbar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormToolbar.swift; sourceTree = "<group>"; };
 		4DB4C8B11E57F97900934E22 /* UIBarButtonItem+Hidden.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem+Hidden.swift"; sourceTree = "<group>"; };
+		4DB4C8BA1E58376400934E22 /* FormInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormInput.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +80,7 @@
 				4D7C81811E57F7F100C6DD71 /* FormToolbar.h */,
 				4D7C81821E57F7F100C6DD71 /* Info.plist */,
 				4DB4C8AF1E57F8B900934E22 /* FormToolbar.swift */,
+				4DB4C8BA1E58376400934E22 /* FormInput.swift */,
 				4DB4C8B11E57F97900934E22 /* UIBarButtonItem+Hidden.swift */,
 			);
 			path = FormToolbar;
@@ -203,6 +206,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DB4C8BB1E58376400934E22 /* FormInput.swift in Sources */,
 				4DB4C8B21E57F97900934E22 /* UIBarButtonItem+Hidden.swift in Sources */,
 				4DB4C8B01E57F8B900934E22 /* FormToolbar.swift in Sources */,
 			);

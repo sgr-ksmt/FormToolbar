@@ -13,7 +13,13 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate 
     
     @IBOutlet private weak var form1: UITextField!
     @IBOutlet private weak var form2: UITextField!
-    @IBOutlet private weak var form3: UITextView!
+    @IBOutlet private weak var form3: UITextView! {
+        didSet {
+            form3.layer.borderColor = UIColor.lightGray.cgColor
+            form3.layer.borderWidth = 1.0 / UIScreen.main.scale
+            form3.layer.cornerRadius = 4.0
+        }
+    }
     @IBOutlet private weak var form4: UITextField!
     @IBOutlet private weak var form5: UITextField!
     
@@ -21,7 +27,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate 
     @IBOutlet private weak var doneButtonTitleForm: UITextField!
 
     lazy var toolbar: FormToolbar = {
-        FormToolbar(inputs: self.inputs)
+        return FormToolbar(inputs: self.inputs)
     }()
     
     var inputs: [FormInput] {
@@ -30,6 +36,11 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        form1.delegate = self
+        form2.delegate = self
+        form3.delegate = self
+        form4.delegate = self
+        form5.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
