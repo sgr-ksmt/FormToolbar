@@ -96,6 +96,21 @@ final public class FormToolbar: UIToolbar {
         }
     }
     
+    private var currentFormItem: FormItem? {
+        return formItems.filter { $0.input?.responder.isFirstResponder ?? false }.first
+    }
+    
+    public var currentInput: FormInput? {
+        return currentFormItem?.input
+    }
+
+    public var previousInput: FormInput? {
+        return currentFormItem?.previousInput
+    }
+
+    public var nextInput: FormInput? {
+        return currentFormItem?.nextInput
+    }
     
     required convenience public init(inputs: [FormInput], attachToolbarToInputs: Bool = true) {
         self.init(frame: CGRect(origin: .zero, size: CGSize(width: UIScreen.main.bounds.width, height: 44.0)))
@@ -161,14 +176,14 @@ final public class FormToolbar: UIToolbar {
     }
     
     public func goBack() {
-        if let currentFormItem = detectCurrentFormItem() {
+        if let currentFormItem = currentFormItem {
             currentFormItem.input?.responder.resignFirstResponder()
             currentFormItem.previousInput?.responder.becomeFirstResponder()
         }
     }
     
     public func goForward() {
-        if let currentFormItem = detectCurrentFormItem() {
+        if let currentFormItem = currentFormItem {
             currentFormItem.input?.responder.resignFirstResponder()
             currentFormItem.nextInput?.responder.becomeFirstResponder()
         }
@@ -177,10 +192,6 @@ final public class FormToolbar: UIToolbar {
     private func updateBarItems() {
         let buttonItems: [UIBarButtonItem] = [backButton, fixedSpacer, forwardButton, flexibleSpacer, doneButton]
         setItems(buttonItems, animated: false)
-    }
-    
-    private func detectCurrentFormItem() -> FormItem? {
-        return formItems.filter { $0.input?.responder.isFirstResponder ?? false }.first
     }
     
     @objc private func backButtonDidTap(_: UIBarButtonItem) {
@@ -192,6 +203,6 @@ final public class FormToolbar: UIToolbar {
     }
     
     @objc private func doneButtonDidtap(_: UIBarButtonItem) {
-        detectCurrentFormItem()?.input?.responder.resignFirstResponder()
+        currentFormItem?.input?.responder.resignFirstResponder()
     }
 }
