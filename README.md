@@ -139,7 +139,7 @@ github 'sgr-ksmt/FormToolbar' ~> 1.0
 it, simply add the following line to your Podfile:
 
 ```ruby
-pod 'FormToolbar' ~> 1.0
+pod 'FormToolbar', '~> 1.0'
 ```
 
 and run `pod install`
