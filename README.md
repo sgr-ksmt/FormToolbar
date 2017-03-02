@@ -125,7 +125,7 @@ func textFieldShouldReturn(_ textField: UITextField) -> Bool {
 - Add the following to your *Cartfile*:
 
 ```bash
-github 'sgr-ksmt/FormToolbar' ~> 1.0
+github "sgr-ksmt/FormToolbar" ~> 1.0
 ```
 
 - Run `carthage update`
