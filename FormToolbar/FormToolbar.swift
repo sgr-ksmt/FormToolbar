@@ -26,29 +26,49 @@ final public class FormToolbar: UIToolbar {
         weak var previousInput: FormInput?
         weak var nextInput: FormInput?
     }
-    
-    private lazy var backButton: UIBarButtonItem! = {
+
+    private var _backButton: UIBarButtonItem?
+    private var backButton: UIBarButtonItem {
+        if let button = _backButton {
+            return button
+        }
         let button = UIBarButtonItem(barButtonHiddenItem: self.backButtonType, target: self, action: #selector(backButtonDidTap(_:)))
+        _backButton = button
         return button
-    }()
-    
-    private lazy var fixedSpacer: UIBarButtonItem! = {
+    }
+
+    private var _fixedSpacer: UIBarButtonItem?
+    private var fixedSpacer: UIBarButtonItem {
+        if let spacer = _fixedSpacer {
+            return spacer
+        }
         let spacer = UIBarButtonItem(barButtonSystemItem: .fixedSpace, target: nil, action: nil)
         spacer.width = self.direction == .upDown ? 8.0 : 20.0
+        _fixedSpacer = spacer
         return spacer
-    }()
-    
-    private lazy var forwardButton: UIBarButtonItem! = {
+    }
+
+    private var _forwardButton: UIBarButtonItem?
+    private var forwardButton: UIBarButtonItem {
+        if let button = _forwardButton {
+            return button
+        }
         let button = UIBarButtonItem(barButtonHiddenItem: self.forwardButtonType, target: self, action: #selector(forwardButtonDidTap(_:)))
+        _forwardButton = button
         return button
-    }()
+    }
     
     private lazy var flexibleSpacer = UIBarButtonItem(barButtonSystemItem: .flexibleSpace, target: nil, action: nil)
-    
-    private lazy var doneButton: UIBarButtonItem! = {
+
+    private var _doneButton: UIBarButtonItem?
+    private var doneButton: UIBarButtonItem {
+        if let button = _doneButton {
+            return button
+        }
         let button = UIBarButtonItem(title: self.doneButtonTitle, style: .done, target: self, action: #selector(doneButtonDidtap(_:)))
+        _doneButton = button
         return button
-    }()
+    }
     
     private var formItems: [FormItem] = []
     
@@ -97,9 +117,9 @@ final public class FormToolbar: UIToolbar {
                 backButtonType = .prev
                 forwardButtonType = .next
             }
-            backButton = nil
-            forwardButton = nil
-            fixedSpacer = nil
+            _backButton = nil
+            _forwardButton = nil
+            _fixedSpacer = nil
             updateBarItems()
         }
     }
@@ -108,7 +128,7 @@ final public class FormToolbar: UIToolbar {
     /// Default is `"Done"`.
     public var doneButtonTitle: String = "Done" {
         didSet {
-            doneButton = nil
+            _doneButton = nil
             updateBarItems()
         }
     }
