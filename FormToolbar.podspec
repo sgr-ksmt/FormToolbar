@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = "FormToolbar"
-  s.version          = "1.0"
+  s.version          = "1.1"
   s.summary          = "Simple, movable and powerful toolbar for UITextField and UITextView."
   s.homepage         = "https://github.com/sgr-ksmt/FormToolbar"
   s.license          = 'MIT'
