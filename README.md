@@ -2,7 +2,7 @@
 Simple, movable and powerful toolbar for UITextField and UITextView.
 
 [![GitHub release](https://img.shields.io/github/release/sgr-ksmt/FormToolbar.svg)](https://github.com/sgr-ksmt/FormToolbar/releases)
-![Language](https://img.shields.io/badge/language-Swift%203-orange.svg)
+![Language](https://img.shields.io/badge/language-Swift%204-orange.svg)
 [![Carthage Compatible](https://img.shields.io/badge/Carthage-compatible-4BC51D.svg?style=flat)](https://github.com/Carthage/Carthage)
 [![CocoaPods  Compatible](https://img.shields.io/badge/Cocoa%20Pods-compatible-4BC51D.svg?style=flat)](https://cocoapods.org)
 
