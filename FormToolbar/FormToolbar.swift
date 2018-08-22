@@ -235,16 +235,16 @@ final public class FormToolbar: UIToolbar {
     /// Go back to previous input.
     public func goBack() {
         if let currentFormItem = currentFormItem {
-            currentFormItem.input?.responder.resignFirstResponder()
             currentFormItem.previousInput?.responder.becomeFirstResponder()
+            currentFormItem.input?.responder.resignFirstResponder()
         }
     }
     
     /// Go forward to next input.
     public func goForward() {
         if let currentFormItem = currentFormItem {
-            currentFormItem.input?.responder.resignFirstResponder()
             currentFormItem.nextInput?.responder.becomeFirstResponder()
+            currentFormItem.input?.responder.resignFirstResponder()
         }
     }
     
