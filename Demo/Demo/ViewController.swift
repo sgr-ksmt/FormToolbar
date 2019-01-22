@@ -52,8 +52,8 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: .UIKeyboardWillHide, object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(_:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(_:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
 
     override func didReceiveMemoryWarning() {
@@ -90,7 +90,7 @@ class ViewController: UIViewController, UITextFieldDelegate, UITextViewDelegate 
     
     @objc func keyboardWillShow(_ notification: Notification) {
         let userInfo: NSDictionary = notification.userInfo! as NSDictionary
-        let keyboardInfo = userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue
+      let keyboardInfo = userInfo[UIResponder.keyboardFrameBeginUserInfoKey] as! NSValue
         let keyboardSize = keyboardInfo.cgRectValue.size
         let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height + 16.0, right: 0)
         scrollView.contentInset = contentInsets
